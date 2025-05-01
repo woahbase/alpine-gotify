@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv bash
+set -e
+
+GOTIFY_HOME=${GOTIFY_HOME:-/gotify}
+GOTIFY_CONFIG=${GOTIFY_CONFIG:-/etc/gotify/config.yml};
+# GOTIFY_ARGS="${GOTIFY_ARGS:- }";
+
+cd ${GOTIFY_HOME} || exit 1; # so relative paths like data/* work
+
+s6-setuidgid ${S6_USER:-alpine} \
+exec \
+    gotify-server \
+    ${GOTIFY_ARGS} \
+    ;
