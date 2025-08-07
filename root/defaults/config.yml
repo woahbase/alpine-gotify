@@ -1,6 +1,3 @@
-# reference:
-#   https://github.com/gotify/server/blob/master/config.example.yml
-#   https://gotify.net/docs/config
 # Example configuration file for the server.
 # Save it to `config.yml` when edited
 

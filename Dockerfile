@@ -10,7 +10,6 @@ ARG CLIARCH
 ARG CLIVERSION
 #
 ENV \
-    GOTIFY_HOME=/gotify \
     GOTIFY_CONFIG=/etc/gotify/config.yml \
     GOTIFY_DATA=/gotify/data \
     GOTIFY_SERVER_PORT=80
@@ -44,7 +43,6 @@ RUN set -ex \
 COPY root/ /
 #
 VOLUME  ${GOTIFY_DATA}
-# WORKDIR ${GOTIFY_HOME}
 #
 EXPOSE ${GOTIFY_SERVER_PORT}
 #

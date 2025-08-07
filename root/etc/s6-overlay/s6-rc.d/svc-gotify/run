@@ -1,13 +1,15 @@
 #!/usr/bin/with-contenv bash
 set -e
 
-GOTIFY_HOME=${GOTIFY_HOME:-/gotify}
+usercmd () { if [ "X${EUID}" != "X0" ]; then ${1} "${@:2}"; else s6-setuidgid ${PUID:-1000}:${PGID:-1000} ${1} "${@:2}"; fi; }
+
+GOTIFY_DATA=${GOTIFY_DATA:-/gotify/data}
 GOTIFY_CONFIG=${GOTIFY_CONFIG:-/etc/gotify/config.yml};
 # GOTIFY_ARGS="${GOTIFY_ARGS:- }";
 
-cd ${GOTIFY_HOME} || exit 1; # so relative paths like data/* work
+cd $(dirname ${GOTIFY_DATA}) || exit 1; # so relative paths like data/* work
 
-s6-setuidgid ${S6_USER:-alpine} \
+usercmd \
 exec \
     gotify-server \
     ${GOTIFY_ARGS} \
